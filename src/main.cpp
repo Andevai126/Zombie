@@ -1,72 +1,50 @@
 #include <Arduino.h>
-
 #include <SoftwareSerial.h>
-SoftwareSerial LOGSerial(0, 1); // RX, TX1
-SoftwareSerial DFSerial(3, 4);
+
+#include "deep.hpp"
 #include "df.hpp"
 
+SoftwareSerial LOGSerial(0, 1); // RX, TX
+
 void setup() {
+  // Setup Serials
   LOGSerial.begin(2400);
   DFSerial.begin(9600);
+  // Set focus, writing always works
   LOGSerial.listen();
 
-  
+  // Button
   pinMode(2, INPUT);
-
+  // Transistor controlpin / Power DFPlayer
   pinMode(0, OUTPUT);
   digitalWrite(0, LOW);
+  // Led indicator
+  pinMode(3, OUTPUT);
+  digitalWrite(3, LOW);
 
+  // Save power
+  disable();
 
   LOGSerial.print(F("Setup complete"));
 }
 
 void loop() {
-  static unsigned long timer = millis();
+  static unsigned long Nwakeups = 0;
+  Nwakeups++;
 
-  if (LOGSerial.available() && !digitalRead(2)) {
-    String s1 = LOGSerial.readStringUntil(' ');
-    String s2 = LOGSerial.readStringUntil(' ');
-    String s3 = LOGSerial.readStringUntil('\n');
-    
-    if (!(s1.length() == 0 || s2.length() == 0 || s3.length() == 0)) {
-      LOGSerial.println("cmd: < " + s1 + " " + s2 + " " + s3 + " >");
+  // Blink LED to show wakeup
+  digitalWrite(3, HIGH);
+  delay(100);
+  digitalWrite(3, LOW);
 
-      uint8_t byte1 = (uint8_t) strtol(s1.c_str(), NULL, 16);
-      uint8_t byte2 = (uint8_t) strtol(s2.c_str(), NULL, 16);
-      uint8_t byte3 = (uint8_t) strtol(s3.c_str(), NULL, 16);
-      
-      DFSerial.listen();
-      DFSerial.flush();
+  // Print wakeup count
+  LOGSerial.println(Nwakeups);
 
-      DFSerial.write(createCommand(byte1, byte2, byte3), 10);
+  // Play a track
+  play(1);
 
-      LOGSerial.print("reply: < ");
-      while (millis() - timer < 2000) {
-        if (DFSerial.available()) {
-          LOGSerial.print(DFSerial.read(), HEX);
-          LOGSerial.write(" ");
-        }
-      }
-      LOGSerial.println(">");
-
-      LOGSerial.listen();
-      LOGSerial.flush();
-    }
-  }
-
-
-
-  if (millis() - timer > 1500) {
-    timer = millis();
-    LOGSerial.print(".");
-    LOGSerial.print(digitalRead(2));
-  }
-
-
-
-  if (digitalRead(2) == HIGH) {
-    digitalWrite(0, HIGH);
-    delay(100);
-    digitalWrite(0, LOW);
+  // Sleep
+  for (int i = 0; i < 1; i++) {
+    deepSleep();
   }
 }

@@ -1,20 +1,19 @@
 #include <Arduino.h>
-
 #include <SoftwareSerial.h>
 
-SoftwareSerial mySerial(10, 11); // RX, TX
+SoftwareSerial ATSerial(10, 11); // RX, TX
 
 void setup() {
   Serial.begin(2400);
-  mySerial.begin(2400);
+  ATSerial.begin(2400);
   Serial.println("Serial forwarder started");
 }
 
 void loop() {
-  if (mySerial.available()) {
-  Serial.write(mySerial.read());
+  if (ATSerial.available()) {
+  Serial.write(ATSerial.read());
   }
   if (Serial.available()) {
-    mySerial.write(Serial.read());
+    ATSerial.write(Serial.read());
   }
 }
