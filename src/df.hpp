@@ -1,9 +1,10 @@
 #include <Arduino.h>
+
 #include <SoftwareSerial.h>
 
 SoftwareSerial DFSerial(3, 4); // RX, TX
 
-uint16_t calculateCheckSum(uint8_t *buffer){
+uint16_t calculateCheckSum(uint8_t *buffer) {
   uint16_t sum = 0;
   for (int i=1; i<7; i++) {
     sum += buffer[i];

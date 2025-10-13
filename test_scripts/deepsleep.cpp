@@ -3,8 +3,8 @@
 #include <avr/sleep.h>
 #include <avr/wdt.h>
 #include <avr/interrupt.h>
-
 #include <SoftwareSerial.h>
+
 SoftwareSerial LOGSerial(0, 1); // RX, TX
 
 volatile bool watchdogTriggered = false;

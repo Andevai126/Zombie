@@ -1,21 +1,26 @@
 #include <Arduino.h>
 
+#include <avr/io.h>
 #include <avr/sleep.h>
 #include <avr/wdt.h>
 #include <avr/interrupt.h>
 
-volatile bool watchdogTriggered = false;
+volatile bool watchdogISRtriggered = false;
+volatile bool buttonISRtriggered = false;
 
 void disable() {
   ADCSRA &= ~(1 << ADEN); // Disable ADC
   ACSR |= (1 << ACD);     // Disable analog comparator
 }
 
-// Watchdog Interrupt
-ISR(WDT_vect) {
-  // Wakes up the MCU from sleep — no code needed
-  // watchdogTriggered = true;
+void enable() {
+  cli();
+  GIMSK |= (1 << INT0); // Maybe remove!
+  GIMSK|= (1<<PCIE);
+  PCMSK|=(1<<PCINT2);
+  sei();
 }
+
 
 // Configure and start deep sleep
 void deepSleep() {
@@ -27,6 +32,7 @@ void deepSleep() {
   MCUSR &= ~(1 << WDRF); // Clear reset flag
   WDTCR |= (1 << WDCE) | (1 << WDE); // Enable changes
   WDTCR = (1 << WDIE) | (1 << WDP3) | (1 << WDP0); // Interrupt, ~8s
+  wdt_reset();
   sei(); // Enable interrupts
 
   // Setup deep sleep
@@ -39,4 +45,15 @@ void deepSleep() {
 
   // Exit deep sleep here after ISR wakes it
   sleep_disable();
+}
+
+
+// Button Interrupt
+ISR(INT0_vect) {
+  buttonISRtriggered = true;
+}
+
+// Watchdog Interrupt
+ISR(WDT_vect) {
+  watchdogISRtriggered = true;
 }

@@ -1,10 +1,9 @@
 #include <Arduino.h>
-#include <SoftwareSerial.h>
 
 #include "deep.hpp"
 #include "df.hpp"
+#include "test.hpp"
 
-SoftwareSerial LOGSerial(0, 1); // RX, TX
 
 void setup() {
   // Setup Serials
@@ -13,8 +12,9 @@ void setup() {
   // Set focus, writing always works
   LOGSerial.listen();
 
-  // Button
+  // Button with interrupt
   pinMode(2, INPUT);
+  enable();
   // Transistor controlpin / Power DFPlayer
   pinMode(0, OUTPUT);
   digitalWrite(0, LOW);
@@ -34,17 +34,29 @@ void loop() {
 
   // Blink LED to show wakeup
   digitalWrite(3, HIGH);
-  delay(100);
+  delay(500);
   digitalWrite(3, LOW);
 
-  // Print wakeup count
-  LOGSerial.println(Nwakeups);
+  // Print wakeup count, i.e. heartbeat
+  LOGSerial.print(Nwakeups);
+  LOGSerial.print(F(" "));
 
-  // Play a track
-  play(1);
-
-  // Sleep
-  for (int i = 0; i < 1; i++) {
-    deepSleep();
+  // Run possible tests
+  unsigned long timer = millis();
+  while (millis() - timer < 2000) {
+    test();
   }
+  LOGSerial.print(F("end test"));
+
+  // Sleep until interrupt
+  while (!watchdogISRtriggered && !buttonISRtriggered) {
+    deepSleep();
+    LOGSerial.print(F("."));
+  }
+  LOGSerial.print(F("watch: "));
+  LOGSerial.print(watchdogISRtriggered);
+  LOGSerial.print(F(" btn: "));
+  LOGSerial.println(buttonISRtriggered);
+  watchdogISRtriggered = false;
+  buttonISRtriggered = false;
 }
