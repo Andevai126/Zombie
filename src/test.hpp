@@ -20,9 +20,10 @@ void test() {
 
       if (byte1 == 0 && byte2 == 0 && byte3 == 0) {
         LOGSerial.println("Test: Blink LED");
-        digitalWrite(3, HIGH);
-        delay(100);
-        digitalWrite(3, LOW);
+        // digitalWrite(3, HIGH);
+        // delay(100);
+        // digitalWrite(3, LOW);
+        play(1);
         return;
       }
       if (byte1 == 0 && byte2 == 0 && byte3 == 1) {

@@ -24,15 +24,16 @@ uint8_t* createCommand(uint8_t command, uint8_t argumentHigh, uint8_t argumentLo
 }
 
 void play(uint8_t track) {
+  delay(1000);
   // Power on DFPlayer
   digitalWrite(0, HIGH);
-  delay(100);
+  delay(1000);
   // Set volume to 16 (max 30)
   DFSerial.write(createCommand(0x06, 0x00, 0x10), 10);
-  delay(100);
+  delay(500);
   // Play track
   DFSerial.write(createCommand(0x03, 0x00, track), 10);
-  delay(100);
+  delay(500);
   // Wait until track is finished
   unsigned long start = millis();
   while (millis() - start < 6000) {}
