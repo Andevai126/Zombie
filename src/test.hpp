@@ -5,7 +5,7 @@
 SoftwareSerial LOGSerial(0, 1); // RX, TX
 
 void test() {
-  if (LOGSerial.available() && !digitalRead(2)) {
+  if (LOGSerial.available()) {
     String s1 = LOGSerial.readStringUntil(' ');
     String s2 = LOGSerial.readStringUntil(' ');
     String s3 = LOGSerial.readStringUntil('\n');

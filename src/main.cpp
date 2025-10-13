@@ -1,8 +1,9 @@
 #include <Arduino.h>
 
-#include "deep.hpp"
+
 #include "df.hpp"
 #include "test.hpp"
+#include "deep.hpp"
 
 
 void setup() {
@@ -43,20 +44,17 @@ void loop() {
 
   // Run possible tests
   unsigned long timer = millis();
-  while (millis() - timer < 2000) {
+  while (millis() - timer < 8000) {
     test();
   }
   LOGSerial.print(F("end test"));
 
   // Sleep until interrupt
-  while (!watchdogISRtriggered && !buttonISRtriggered) {
+  while (!buttonISRtriggered) {
     deepSleep();
     LOGSerial.print(F("."));
   }
-  LOGSerial.print(F("watch: "));
-  LOGSerial.print(watchdogISRtriggered);
   LOGSerial.print(F(" btn: "));
   LOGSerial.println(buttonISRtriggered);
-  watchdogISRtriggered = false;
   buttonISRtriggered = false;
 }

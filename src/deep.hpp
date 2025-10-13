@@ -5,7 +5,6 @@
 #include <avr/wdt.h>
 #include <avr/interrupt.h>
 
-volatile bool watchdogISRtriggered = false;
 volatile bool buttonISRtriggered = false;
 
 void disable() {
@@ -22,11 +21,7 @@ void enable() {
 }
 
 
-// Configure and start deep sleep
-void deepSleep() {
-  // Double check DFPlayer is off
-  digitalWrite(0, LOW);
-
+void configSleep() {
   // Setup Watchdog to wake up in ~8 seconds
   cli(); // Disable interrupts
   MCUSR &= ~(1 << WDRF); // Clear reset flag
@@ -34,6 +29,16 @@ void deepSleep() {
   WDTCR = (1 << WDIE) | (1 << WDP3) | (1 << WDP0); // Interrupt, ~8s
   wdt_reset();
   sei(); // Enable interrupts
+}
+
+
+// Configure and start deep sleep
+void deepSleep() {
+  LOGSerial.print(F("Sleep"));
+  // Double check DFPlayer is off
+  digitalWrite(0, LOW);
+
+  configSleep();
 
   // Setup deep sleep
   set_sleep_mode(SLEEP_MODE_PWR_DOWN); // Deepest sleep
@@ -55,5 +60,4 @@ ISR(INT0_vect) {
 
 // Watchdog Interrupt
 ISR(WDT_vect) {
-  watchdogISRtriggered = true;
 }
