@@ -2,15 +2,15 @@
 
 
 #include "df.hpp"
-#include "test.hpp"
 #include "deep.hpp"
-
+#include "test.hpp"
+#include "menu.hpp"
 
 void setup() {
   // Setup Serials
   LOGSerial.begin(2400);
   DFSerial.begin(9600);
-  // Set focus, writing always works
+  // Set focus for listening, writing works on all SoftwareSerial's
   LOGSerial.listen();
 
   // Button with interrupt
@@ -30,31 +30,43 @@ void setup() {
 }
 
 void loop() {
+  // Track number of wakeups
   static unsigned long Nwakeups = 0;
   Nwakeups++;
 
-  // Blink LED to show wakeup
-  digitalWrite(3, HIGH);
-  delay(500);
-  digitalWrite(3, LOW);
+  // Select action
+  uint8_t action = getSelection();
 
-  // Print wakeup count, i.e. heartbeat
-  LOGSerial.print(Nwakeups);
-  LOGSerial.print(F(" "));
+  // Perform action
+  switch (action) {
+  case PRINT_N_WAKEUPS:
+    LOGSerial.print(F("Wakeups: "));
+    LOGSerial.println(Nwakeups);
+    break;
 
-  // Run possible tests
-  unsigned long timer = millis();
-  while (millis() - timer < 8000) {
-    test();
+  case RUN_TESTS: {
+    unsigned long timer = millis();
+    while (millis() - timer < 8000) {
+      test();
+    }
+    break;
   }
-  LOGSerial.print(F("end test"));
+  
+  case PLAY_TRACK_1:
+    play(1);
+    break;
+  
+  default:
+    break;
+  }
 
   // Sleep until interrupt
+  LOGSerial.print(F("\nSleeping"));
   while (!buttonISRtriggered) {
     deepSleep();
+    // Heartbeat
     LOGSerial.print(F("."));
   }
-  LOGSerial.print(F(" btn: "));
-  LOGSerial.println(buttonISRtriggered);
+  LOGSerial.println(F("Awoken"));
   buttonISRtriggered = false;
 }

@@ -20,8 +20,11 @@ void enable() {
   sei();
 }
 
+// Configure and start deep sleep
+void deepSleep() {
+  // Double check DFPlayer is off
+  digitalWrite(0, LOW);
 
-void configSleep() {
   // Setup Watchdog to wake up in ~8 seconds
   cli(); // Disable interrupts
   MCUSR &= ~(1 << WDRF); // Clear reset flag
@@ -29,16 +32,6 @@ void configSleep() {
   WDTCR = (1 << WDIE) | (1 << WDP3) | (1 << WDP0); // Interrupt, ~8s
   wdt_reset();
   sei(); // Enable interrupts
-}
-
-
-// Configure and start deep sleep
-void deepSleep() {
-  LOGSerial.print(F("Sleep"));
-  // Double check DFPlayer is off
-  digitalWrite(0, LOW);
-
-  configSleep();
 
   // Setup deep sleep
   set_sleep_mode(SLEEP_MODE_PWR_DOWN); // Deepest sleep
@@ -51,7 +44,6 @@ void deepSleep() {
   // Exit deep sleep here after ISR wakes it
   sleep_disable();
 }
-
 
 // Button Interrupt
 ISR(INT0_vect) {
