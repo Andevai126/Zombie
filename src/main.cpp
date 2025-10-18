@@ -39,9 +39,8 @@ void loop() {
 
   // Perform action
   switch (action) {
-  case PRINT_N_WAKEUPS:
-    LOGSerial.print(F("Wakeups: "));
-    LOGSerial.println(Nwakeups);
+    case PLAY_TRACK_1:
+    play(1);
     break;
 
   case RUN_TESTS: {
@@ -52,8 +51,13 @@ void loop() {
     break;
   }
   
-  case PLAY_TRACK_1:
-    play(1);
+  case BLINK_LED:
+    blink();
+    break;
+  
+  case PRINT_N_WAKEUPS:
+    LOGSerial.print(F("Wakeups: "));
+    LOGSerial.println(Nwakeups);
     break;
   
   default:

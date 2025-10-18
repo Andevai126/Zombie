@@ -1,8 +1,9 @@
 #include <Arduino.h>
 
-#define PRINT_N_WAKEUPS 1
-#define RUN_TESTS 2
-#define PLAY_TRACK_1 3
+#define PLAY_TRACK_1 1
+#define PRINT_N_WAKEUPS 2
+#define RUN_TESTS 3
+#define BLINK_LED 4
 
 void blink() {
   digitalWrite(3, HIGH);
@@ -27,7 +28,7 @@ uint8_t getSelection() {
         delay(100);
       }
       counter++;
-      LOGSerial.print(F(".")); //
+      LOGSerial.print(F("."));
     }
   }
   LOGSerial.println();
