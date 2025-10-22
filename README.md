@@ -1,15 +1,38 @@
 # Zombie
+A hardware and software solution for your psychological tormenting needs.
 
-https://www.youtube.com/watch?v=sycSdI49hlY&t=1s
-see images
-see audio
-see stepwise process
-see backup/miscilenious / test_scripts
-schematic
-link
-https://wiki.dfrobot.com/DFPlayer_Mini_SKU_DFR0299#Connection_Diagram
-to see commands, sd-card naming scheme
-list of components
+## Discription
+The developed device can play any soundtracks, spaced over large periods of time. It is compact, runs on a single battery and is low power.
 
-https://web.archive.org/web/20240123141250/https://www.gadgetronicx.com/attiny85-external-pin-change-interrupt/
+## Getting started
+[Learn how to program an ATTINY85.](https://www.youtube.com/watch?v=sycSdI49hlY)
 
+### Hardware components list
+- ATTINY85
+- DFPlayer
+- 32GB SD card (Can be way smaller) "expensive"
+- 18650 battery "expensive"
+- 3W speaker
+- MJE3055T transistor
+- Push button
+- LED
+- 1x 10kΩ resistor
+- 4x 1kΩ resistor
+- 1x 10uF capacitor (Only needed for arduino as ISP programming)
+
+### Hardware schematic
+![Schematic of circuit](images/circuit.png)
+
+### Software
+This is a [PlatformIO project in VSCode](https://docs.platformio.org/en/stable/integration/ide/vscode.html). Create a new PlatformIO project, and replace all files and folders with this repository.
+Build and upload the code. The first time building can take a while.
+
+### Sound tracks
+Copy the audio files found in "/audio" to the SD card.
+
+## Notes
+- [DFPlayer commands and sd-card naming scheme](https://wiki.dfrobot.com/DFPlayer_Mini_SKU_DFR0299#Connection_Diagram).
+- "/test_scripts" is only for testing purposes, and is not required.
+
+## Acknowledgements
+- [External interrupt](https://web.archive.org/web/20240123141250/https://www.gadgetronicx.com/attiny85-external-pin-change-interrupt/)
