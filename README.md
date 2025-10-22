@@ -18,7 +18,7 @@ The developed device can play any soundtracks, spaced over large periods of time
 - LED
 - 1x 10kΩ resistor
 - 4x 1kΩ resistor
-- 1x 10uF capacitor (Only needed for arduino as ISP programming)
+- 1x 10uF capacitor (Only needed for uploading code)
 
 ### Hardware schematic
 ![Schematic of circuit](images/circuit.png)
