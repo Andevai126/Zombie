@@ -5,10 +5,10 @@ A hardware and software solution for your psychological tormenting needs.
 The developed device can play any soundtracks, spaced over large periods of time. It is compact, runs on a single battery and is low power.
 
 ## Getting started
-[Learn how to upload code to an ATTINY85.](https://www.youtube.com/watch?v=sycSdI49hlY)
+[Learn how to upload code to an ATtiny85.](https://www.youtube.com/watch?v=sycSdI49hlY)
 
 ### Hardware components list
-- ATTINY85
+- ATtiny85
 - DFPlayer
 - 32GB SD card (Can be way smaller) "expensive"
 - 18650 battery "expensive"
