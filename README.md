@@ -1,11 +1,11 @@
 # Zombie
 A hardware and software solution for your psychological tormenting needs.
 
-## Discription
+## Description
 The developed device can play any soundtracks, spaced over large periods of time. It is compact, runs on a single battery and is low power.
 
 ## Getting started
-[Learn how to program an ATTINY85.](https://www.youtube.com/watch?v=sycSdI49hlY)
+[Learn how to upload code to an ATTINY85.](https://www.youtube.com/watch?v=sycSdI49hlY)
 
 ### Hardware components list
 - ATTINY85
@@ -31,7 +31,8 @@ Build and upload the code. The first time building can take a while.
 Copy the audio files found in "/audio" to the SD card.
 
 ## Notes
-- [DFPlayer commands and sd-card naming scheme](https://wiki.dfrobot.com/DFPlayer_Mini_SKU_DFR0299#Connection_Diagram).
+- [DFPlayer documentation](https://wiki.dfrobot.com/DFPlayer_Mini_SKU_DFR0299#Connection_Diagram).
+- Both .wav and .mp3 work.
 - "/test_scripts" is only for testing purposes, and is not required.
 
 ## Acknowledgements
