@@ -1,6 +1,7 @@
 #include <Arduino.h>
 
 #include <SoftwareSerial.h>
+#include <stdlib.h>
 
 SoftwareSerial DFSerial(3, 4); // RX, TX
 
@@ -23,7 +24,7 @@ uint8_t* createCommand(uint8_t command, uint8_t argumentHigh, uint8_t argumentLo
     return array;
 }
 
-void play(uint8_t track) {
+void play(uint8_t track, uint8_t duration) {  
   delay(1000);
   // Power on DFPlayer
   digitalWrite(0, HIGH);
@@ -35,8 +36,34 @@ void play(uint8_t track) {
   DFSerial.write(createCommand(0x03, 0x00, track), 10);
   delay(500);
   // Wait until track is finished
-  unsigned long start = millis();
-  while (millis() - start < 7000) {}
+  delay((duration+1)*1000); // Maybe work with mod 8 and deep sleep?
   // Power off DFPlayer
   digitalWrite(0, LOW);
+}
+
+void randomSetup() {
+  randomSeed(millis());
+}
+
+void randomShuffle(uint8_t* array, size_t n) {
+  for (size_t i = n - 1; i > 0; i--) {
+    size_t j = random(0, i + 1);
+    uint8_t temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+  }
+}
+
+void playRandom() {
+  static uint8_t durations[] = {0, 6, 16, 4, 4, 5};
+  static uint8_t tracks[] = {1, 2, 3, 4, 5};
+  static uint8_t pointer = 99;
+  if (pointer > 4) {
+    pointer = 0;
+    randomShuffle(tracks, 5);
+  } else {
+    pointer++;
+  }
+  uint8_t track = tracks[pointer];
+  play(track, durations[track]);
 }

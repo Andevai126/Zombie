@@ -1,9 +1,10 @@
 #include <Arduino.h>
 
 #define PLAY_TRACK_1 1
-#define PRINT_N_WAKEUPS 2
-#define RUN_TESTS 3
-#define BLINK_LED 4
+#define RUN_TESTS 2
+#define BLINK_LED 3
+#define PLAY_RANDOM_TRACK 4
+#define PRINT_N_WAKEUPS 5
 
 void blink() {
   digitalWrite(3, HIGH);
@@ -20,7 +21,7 @@ uint8_t getSelection() {
   uint8_t counter = 0;
   LOGSerial.print(F("Counting presses"));
   unsigned long timer = millis();
-  while (millis() - timer < 4000) {
+  while (millis() - timer < 6000) {
     if (buttonISRtriggered) {
       // Wait for button release
       while (buttonISRtriggered) {

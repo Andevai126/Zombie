@@ -63,7 +63,7 @@ void test() {
       }
       if (byte1 == 0xF1) {
         LOGSerial.println("Test: Play track 1");
-        play(1);
+        play(1, 6);
         return;
       }
       

@@ -1,8 +1,7 @@
 #include <Arduino.h>
 
-
-#include "df.hpp"
 #include "deep.hpp"
+#include "df.hpp"
 #include "test.hpp"
 #include "menu.hpp"
 
@@ -10,7 +9,7 @@ void setup() {
   // Setup Serials
   LOGSerial.begin(2400);
   DFSerial.begin(9600);
-  // Set focus for listening, writing works on all SoftwareSerial's
+  // Set focus for listening, writing always works on any SoftwareSerial
   LOGSerial.listen();
 
   // Button with interrupt
@@ -26,10 +25,25 @@ void setup() {
   // Save power
   disable();
 
+  // Randomizer
+  randomSetup();
+
   LOGSerial.print(F("Setup complete"));
 }
 
 void loop() {
+  // Sleep until interrupt
+  LOGSerial.print(F("\nSleeping"));
+  while (!buttonISRtriggered) {
+    deepSleep();
+    // Heartbeat
+    LOGSerial.print(F("."));
+  }
+  LOGSerial.println(F("Awoken"));
+  buttonISRtriggered = false;
+
+  // ---------------------------------
+
   // Track number of wakeups
   static unsigned long Nwakeups = 0;
   Nwakeups++;
@@ -40,7 +54,7 @@ void loop() {
   // Perform action
   switch (action) {
     case PLAY_TRACK_1:
-    play(1);
+    play(1, 6);
     break;
 
   case RUN_TESTS: {
@@ -55,6 +69,10 @@ void loop() {
     blink();
     break;
   
+  case PLAY_RANDOM_TRACK:
+    playRandom();
+    break;
+  
   case PRINT_N_WAKEUPS:
     LOGSerial.print(F("Wakeups: "));
     LOGSerial.println(Nwakeups);
@@ -63,14 +81,4 @@ void loop() {
   default:
     break;
   }
-
-  // Sleep until interrupt
-  LOGSerial.print(F("\nSleeping"));
-  while (!buttonISRtriggered) {
-    deepSleep();
-    // Heartbeat
-    LOGSerial.print(F("."));
-  }
-  LOGSerial.println(F("Awoken"));
-  buttonISRtriggered = false;
 }
