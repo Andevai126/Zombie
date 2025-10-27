@@ -21,6 +21,9 @@ void setup() {
   // Led indicator
   pinMode(3, OUTPUT);
   digitalWrite(3, LOW);
+  // Transistor controlpin / Connect Speaker
+  pinMode(1, OUTPUT);
+  digitalWrite(1, LOW);
 
   // Save power
   disable();
@@ -54,7 +57,7 @@ void loop() {
   // Perform action
   switch (action) {
     case PLAY_TRACK_1:
-    play(1, 6);
+    play(1, 9);
     break;
 
   case RUN_TESTS: {

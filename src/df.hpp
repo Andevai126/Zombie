@@ -24,19 +24,24 @@ uint8_t* createCommand(uint8_t command, uint8_t argumentHigh, uint8_t argumentLo
     return array;
 }
 
-void play(uint8_t track, uint8_t duration) {  
-  delay(1000);
+void play(uint8_t track, uint8_t duration) {
+  // Disconnect speaker
+  digitalWrite(1, LOW);
   // Power on DFPlayer
   digitalWrite(0, HIGH);
   delay(1000);
-  // Set volume to 16 (max 30)
-  DFSerial.write(createCommand(0x06, 0x00, 0x08), 10);
-  delay(500);
+  // Set volume to 21 (max 30)
+  DFSerial.write(createCommand(0x06, 0x00, 0x15), 10);
+  delay(100);
   // Play track
   DFSerial.write(createCommand(0x03, 0x00, track), 10);
   delay(500);
+  // Connect speaker
+  digitalWrite(1, HIGH);
   // Wait until track is finished
   delay((duration+1)*1000); // Maybe work with mod 8 and deep sleep?
+  // Disconnect speaker
+  digitalWrite(1, LOW);
   // Power off DFPlayer
   digitalWrite(0, LOW);
 }

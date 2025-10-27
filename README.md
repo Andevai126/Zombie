@@ -13,12 +13,12 @@ The developed device can play any soundtracks, spaced over large periods of time
 - 32GB SD card (Can be way smaller) "expensive"
 - 18650 battery "expensive"
 - 3W speaker
-- MJE3055T transistor
+- 2x MJE3055T transistor
 - Push button
 - LED
 - 1x 10kΩ resistor
-- 4x 1kΩ resistor
-- 1x 10uF capacitor (Only needed for uploading code)
+- 5x 1kΩ resistor
+- 1x 10μF capacitor (Only needed for uploading code)
 
 ### Hardware schematic
 ![Schematic of circuit](images/circuit.png)
