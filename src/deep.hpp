@@ -20,9 +20,9 @@ void disable() {
 void deepSleep() {
   // Double check peripherals are off
   digitalWrite(0, LOW);
-  digitalWrite(1, LOW);
+  digitalWrite(1, HIGH);
   digitalWrite(3, LOW);
-  digitalWrite(4, LOW);
+  digitalWrite(4, HIGH);
 
   cli(); // Disable interrupts
     // Setup button
