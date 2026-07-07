@@ -14,7 +14,6 @@ void setup() {
 
   // Button with interrupt
   pinMode(2, INPUT);
-  enable();
   // Transistor controlpin / Power DFPlayer
   pinMode(0, OUTPUT);
   digitalWrite(0, LOW);
