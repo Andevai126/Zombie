@@ -2,13 +2,14 @@
 A hardware and software solution for your psychological tormenting needs.
 
 ## Description
-The developed device can play any soundtracks, spaced over large periods of time. It is compact, runs on a single battery and is low power.
+The developed device can play any soundtracks, spaced over large periods of time. It is compact, runs on a single battery and is low power, using only 3μA in deepsleep!
 
 ## Getting started
 [Learn how to upload code to an ATtiny85.](https://www.youtube.com/watch?v=sycSdI49hlY)
 
 ### Hardware components list
 - ATtiny85
+- 8-pin IC socket (Optional)
 - DFPlayer
 - 32GB SD card (Can be way smaller) "expensive"
 - 18650 battery "expensive"
@@ -16,9 +17,10 @@ The developed device can play any soundtracks, spaced over large periods of time
 - 2x MJE3055T transistor
 - Push button
 - LED
-- 1x 10kΩ resistor
-- 5x 1kΩ resistor
-- 1x 10μF capacitor (Only needed for uploading code)
+- 10kΩ resistor
+- 4x 1kΩ resistor
+- 10μF capacitor (Only needed for uploading code)
+- TP4046 charger (Only for recharging the battery)
 
 ### Hardware schematic
 ![Schematic of circuit](images/circuit.png)
