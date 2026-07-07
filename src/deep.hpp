@@ -22,8 +22,10 @@ void enable() {
 
 // Configure and start deep sleep
 void deepSleep() {
-  // Double check DFPlayer is off
+  // Double check peripherals are off
   digitalWrite(0, LOW);
+  digitalWrite(1, LOW);
+  digitalWrite(3, LOW);
 
   // Setup Watchdog to wake up in ~8 seconds
   cli(); // Disable interrupts
