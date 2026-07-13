@@ -8,19 +8,24 @@ The developed device can play any soundtracks, spaced over large periods of time
 [Learn how to upload code to an ATtiny85.](https://www.youtube.com/watch?v=sycSdI49hlY)
 
 ### Hardware components list
-- ATtiny85
-- 8-pin IC socket (Optional)
-- DFPlayer
-- 32GB SD card (Can be way smaller) "expensive"
-- 18650 battery "expensive"
-- 3W speaker
-- 2x MJE3055T transistor
-- Push button
-- LED
-- 10kΩ resistor
-- 4x 1kΩ resistor
-- 10μF capacitor (Only needed for uploading code)
-- TP4046 charger (Only for recharging the battery)
+| Component              | Estimated Cost | Notes                              |
+|------------------------|----------------|------------------------------------|
+| ATtiny85               | €2.53          |                                    |
+| 8-pin IC socket        | €0.18          | Only for post-assembly code upload |
+| DFPayer mini           | €1.45          |                                    |
+| SD card                | €5.91          | 32GB is common, but overkill       |
+| 18650 battery          | €2.63          | Rechargeable                       |
+| battery holder         | €0.34          |                                    |
+| small 3W 4Ω speaker    | €1.13          |                                    |
+| 2x MJE3055T transistor | €0.20          |                                    |
+| 4pin push button       | €0             |                                    |
+| LED Diode              | €0             |                                    |
+| 10kΩ resistor          | €0             |                                    |
+| 4x 1kΩ resistor        | €0             |                                    |
+| 10μF capacitor         | €0             | Only for uploading code            |
+| TP4046 charger         | €0.21          | Only for recharging the battery    |
+| 5x7cm universal PCB    | €0.66          | Optional, but recommended          |
+| Total                  | €15.14         |                                    |
 
 ### Hardware schematic
 ![Schematic of circuit](images/circuit.png)
@@ -36,6 +41,9 @@ Copy the audio files found in "/audio" to the SD card.
 - [DFPlayer documentation](https://wiki.dfrobot.com/DFPlayer_Mini_SKU_DFR0299#Connection_Diagram).
 - Both .wav and .mp3 work.
 - "/test_scripts" is only for testing purposes, and is not required.
+
+## Final result
+![Picture of circuit inside 3d print](images/picture.jpg)
 
 ## Acknowledgements
 - [External interrupt](https://web.archive.org/web/20240123141250/https://www.gadgetronicx.com/attiny85-external-pin-change-interrupt/)
