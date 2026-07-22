@@ -3,7 +3,7 @@
 #include <SoftwareSerial.h>
 #include <stdlib.h>
 
-SoftwareSerial DFSerial(3, 4); // RX, TX
+SoftwareSerial DFSerial(-1, 4); // RX3, TX
 
 uint16_t calculateCheckSum(uint8_t *buffer) {
   uint16_t sum = 0;

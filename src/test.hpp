@@ -2,7 +2,7 @@
 
 #include <SoftwareSerial.h>
 
-SoftwareSerial LOGSerial(0, 1); // RX, TX
+SoftwareSerial LOGSerial(-1, 1); // RX2, TX
 
 
 void printCharValues(String str) {
