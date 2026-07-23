@@ -41,7 +41,6 @@ void loop() {
   LOGSerial.print(F("\nSleeping"));
   while (!buttonISRtriggered) {
     deepSleep();
-    // Heartbeat
     nHeartbeats++;
     LOGSerial.print(F("."));
   }
@@ -57,28 +56,28 @@ void loop() {
   // Perform action
   switch (action) {
     case PLAY_TRACK_1:
-    play(1, 9);
-    break;
+      play(1, 9);
+      break;
   
-  case BLINK_LED:
-    blink();
-    break;
-  
-  case PLAY_RANDOM_TRACK:
-    playRandom();
-    break;
-  
-  case PRINT_N_HEARTBEATS:
-    LOGSerial.print(F("Heartbeats: "));
-    LOGSerial.println(nHeartbeats);
-    break;
-  
-  case PRINT_N_WAKEUPS:
-    LOGSerial.print(F("Wakeups: "));
-    LOGSerial.println(nWakeups);
-    break;
-  
-  default:
-    break;
+    case BLINK_LED:
+      blink();
+      break;
+    
+    case PLAY_RANDOM_TRACK:
+      playRandom();
+      break;
+    
+    case PRINT_N_HEARTBEATS:
+      LOGSerial.print(F("Heartbeats: "));
+      LOGSerial.println(nHeartbeats);
+      break;
+    
+    case PRINT_N_WAKEUPS:
+      LOGSerial.print(F("Wakeups: "));
+      LOGSerial.println(nWakeups);
+      break;
+    
+    default:
+      break;
   }
 }
