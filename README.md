@@ -40,8 +40,9 @@ Copy the audio files found in "/audio" to the SD card.
 ## Notes
 - [DFPlayer documentation](https://wiki.dfrobot.com/DFPlayer_Mini_SKU_DFR0299#Connection_Diagram).
 - Both .wav and .mp3 work.
-- "/test_scripts" is only for testing purposes, and is not required.
-- For debugging, use /test_scripts/forwarder.cpp.
+- "/test_scripts/" is only for testing purposes, and is not required.
+- For reading the log output, use /test_scripts/forwarder.cpp.
+- To test commands for the DFPlayer, use direct_test.cpp
 
 ## Final result
 ![Picture of circuit inside 3d print](images/picture.jpg)

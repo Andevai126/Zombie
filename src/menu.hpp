@@ -1,9 +1,7 @@
-#include <Arduino.h>
-
 #define PLAY_TRACK_1 1
-#define RUN_TESTS 2
-#define BLINK_LED 3
-#define PLAY_RANDOM_TRACK 4
+#define BLINK_LED 2
+#define PLAY_RANDOM_TRACK 3
+#define PRINT_N_HEARTBEATS 4
 #define PRINT_N_WAKEUPS 5
 
 void blink() {

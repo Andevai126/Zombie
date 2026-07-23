@@ -1,7 +1,4 @@
-#include <Arduino.h>
-
-#include <SoftwareSerial.h>
-#include <stdlib.h>
+#include <stdlib.h> // strtol()
 
 SoftwareSerial DFSerial(-1, 4); // RX3, TX
 
