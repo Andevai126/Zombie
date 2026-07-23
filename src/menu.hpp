@@ -1,8 +1,9 @@
-#define PLAY_TRACK_1 1
-#define BLINK_LED 2
-#define PLAY_RANDOM_TRACK 3
-#define PRINT_N_HEARTBEATS 4
-#define PRINT_N_WAKEUPS 5
+#define START_EXP_1 1
+#define START_EXP_2 2
+#define START_EXP_3 3
+#define START_EXP_4 4
+#define START_EXP_5 5
+#define PLAY_FIRST_TRACK 6
 
 void blink() {
   digitalWrite(3, HIGH);

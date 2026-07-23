@@ -21,14 +21,15 @@ uint8_t* createCommand(uint8_t command, uint8_t argumentHigh, uint8_t argumentLo
   return array;
 }
 
-void play(uint8_t track, uint8_t duration) {
+void play(uint8_t track, uint8_t duration, uint16_t volume = 21) {
   // Disconnect speaker
   digitalWrite(1, LOW);
   // Power on DFPlayer
   digitalWrite(0, HIGH);
   delay(1000);
-  // Set volume to 21 (max 30)
-  DFSerial.write(createCommand(0x06, 0x00, 0x15), 10);
+  // Force volume below 21. This is max by testing. 30 is max by DFPlayer manual
+  volume = (volume < 21) ? volume : 21;
+  DFSerial.write(createCommand(0x06, 0x00, volume), 10);
   delay(100);
   // Play track
   DFSerial.write(createCommand(0x03, 0x00, track), 10);
@@ -56,16 +57,22 @@ void randomShuffle(uint8_t* array, size_t n) {
   }
 }
 
-void playRandom() {
-  static uint8_t durations[] = {0, 6, 16, 4, 4, 5};
-  static uint8_t tracks[] = {1, 2, 3, 4, 5};
-  static uint8_t pointer = 99;
-  if (pointer > 4) {
-    pointer = 0;
-    randomShuffle(tracks, 5);
+struct RandomTracks {
+  uint8_t* tracks;
+  uint8_t* durations;
+  uint8_t* volumes;
+  size_t count;
+  uint8_t pointer;
+};
+
+void playRandom(RandomTracks& r) {
+  if (r.pointer >= r.count - 1) {
+    r.pointer = 0;
+    randomShuffle(r.tracks, r.count);
   } else {
-    pointer++;
+    r.pointer++;
   }
-  uint8_t track = tracks[pointer];
-  play(track, durations[track]);
+
+  uint8_t track = r.tracks[r.pointer];
+  play(track, r.durations[track - 1], r.volumes[track - 1]);
 }

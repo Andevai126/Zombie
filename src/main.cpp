@@ -5,6 +5,7 @@ SoftwareSerial LOGSerial(-1, 1); // RX, TX
 
 #include "df.hpp"
 #include "deep.hpp"
+#include "experiences.hpp"
 #include "menu.hpp"
 
 void setup() {
@@ -30,51 +31,39 @@ void setup() {
   // Randomizer
   randomSetup();
 
-  LOGSerial.print(F("Setup complete"));
+  LOGSerial.println(F("\n\n --- Setup complete ---"));
 }
 
 void loop() {
-  static unsigned long nHeartbeats = 0;
-  static unsigned long nWakeups = 0;
-
-  // Sleep until interrupt
-  LOGSerial.print(F("\nSleeping"));
-  while (!buttonISRtriggered) {
-    deepSleep();
-    nHeartbeats++;
-    LOGSerial.print(F("."));
-  }
-  buttonISRtriggered = false;
-  nWakeups++;
-  LOGSerial.println(F("Awoken"));
-
-  // ---------------------------------
+  sleeping();
 
   // Select action
   uint8_t action = getSelection();
 
   // Perform action
   switch (action) {
-    case PLAY_TRACK_1:
+    case START_EXP_1:
+      experienceTest();
+      break;
+    
+    case START_EXP_2:
+      experienceGhost();
+      break;
+    
+    case START_EXP_3:
+      experienceAnimal();
+      break;
+    
+    case START_EXP_4:
+      experienceClown();
+      break;
+    
+    case START_EXP_5:
+      experienceBreakIn();
+      break;
+
+    case PLAY_FIRST_TRACK:
       play(1, 9);
-      break;
-  
-    case BLINK_LED:
-      blink();
-      break;
-    
-    case PLAY_RANDOM_TRACK:
-      playRandom();
-      break;
-    
-    case PRINT_N_HEARTBEATS:
-      LOGSerial.print(F("Heartbeats: "));
-      LOGSerial.println(nHeartbeats);
-      break;
-    
-    case PRINT_N_WAKEUPS:
-      LOGSerial.print(F("Wakeups: "));
-      LOGSerial.println(nWakeups);
       break;
     
     default:

@@ -51,3 +51,26 @@ ISR(INT0_vect) {
 // Watchdog Interrupt
 ISR(WDT_vect) {
 }
+
+
+bool sleeping(unsigned long duration = 300000) {
+  LOGSerial.print(F("\nduration="));
+  LOGSerial.print(duration);
+
+  unsigned long nHeartbeats = 0;
+
+  // Sleep until interrupt
+  LOGSerial.print(F("\nSleeping"));
+  while (!buttonISRtriggered && nHeartbeats < duration) {
+    deepSleep();
+    nHeartbeats++;
+    LOGSerial.print(F("."));
+  }
+  buttonISRtriggered = false;
+  LOGSerial.println(F("Awoken"));
+
+  LOGSerial.print(F("Heartbeats="));
+  LOGSerial.println(nHeartbeats);
+
+  return nHeartbeats >= duration;
+}
