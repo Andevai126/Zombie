@@ -35,14 +35,16 @@ This is a [PlatformIO project in VSCode](https://docs.platformio.org/en/stable/i
 Build and upload the code. The first time building can take a while.
 
 ### Sound tracks
-Copy the audio files found in "/audio" to the SD card.
+Copy the "01" folder in "/audio/" to the SD card.
+
+### Software navigation
+With the first button press, you enter the menu. The number of button presses in the next 6 seconds decides which action is performed.
 
 ## Notes
 - [DFPlayer documentation](https://wiki.dfrobot.com/DFPlayer_Mini_SKU_DFR0299#Connection_Diagram).
 - Both .wav and .mp3 work.
-- "/test_scripts/" is only for testing purposes, and is not required.
 - For reading the log output, use /test_scripts/forwarder.cpp.
-- To test commands for the DFPlayer, use direct_test.cpp
+- To test commands for the DFPlayer, use /test_scripts/direct_test.cpp
 
 ## Final result
 ![Picture of circuit inside 3d print](images/picture.jpg)
