@@ -63,9 +63,9 @@ void playRandom() {
     pointer++;
   }
 
-  LOGSerial.print("Playing track: ");
+  LOGSerial.print(F("Playing track: "));
   LOGSerial.print(tracks[pointer]);
-  LOGSerial.print(" with duration: ");
+  LOGSerial.print(F(" with duration: "));
   LOGSerial.println(durations[tracks[pointer]]);
 
   uint8_t track = tracks[pointer];
