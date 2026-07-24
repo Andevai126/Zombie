@@ -5,7 +5,6 @@ SoftwareSerial LOGSerial(-1, 1); // RX, TX
 
 #include "df.hpp"
 #include "deep.hpp"
-#include "menu.hpp"
 
 void setup() {
   // Setup Serials
@@ -27,9 +26,6 @@ void setup() {
   // Save power
   disable();
 
-  // Randomizer
-  randomSetup();
-
   LOGSerial.print(F("Setup complete"));
 }
 
@@ -50,34 +46,20 @@ void loop() {
 
   // ---------------------------------
 
-  // Select action
-  uint8_t action = getSelection();
-
-  // Perform action
-  switch (action) {
-    case PLAY_TRACK_1:
-      play(1, 9);
-      break;
-  
-    case BLINK_LED:
-      blink();
-      break;
-    
-    case PLAY_RANDOM_TRACK:
-      playRandom();
-      break;
-    
-    case PRINT_N_HEARTBEATS:
-      LOGSerial.print(F("Heartbeats: "));
-      LOGSerial.println(nHeartbeats);
-      break;
-    
-    case PRINT_N_WAKEUPS:
-      LOGSerial.print(F("Wakeups: "));
-      LOGSerial.println(nWakeups);
-      break;
-    
-    default:
-      break;
+  // Wait for button release
+  unsigned long timer = millis();
+  while (millis() - timer < 6000) {
+    if (buttonISRtriggered) {
+      // Wait for button release
+      while (buttonISRtriggered) {
+        buttonISRtriggered = false;
+        delay(100);
+      }
+    }
   }
+  
+  // ---------------------------------
+
+  randomSeed(nHeartbeats+67487);
+  playRandom();
 }
