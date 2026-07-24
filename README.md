@@ -38,7 +38,7 @@ Build and upload the code. The first time building can take a while.
 Copy the "01" folder in "/audio/" to the SD card.
 
 ### Software navigation
-With the first button press, you enter the menu. The number of button presses in the next 6 seconds decides which action is performed.
+With the first button push, you enter the menu. The number of button pushes in the next 6 seconds decides which action is performed.
 
 ## Notes
 - [DFPlayer documentation](https://wiki.dfrobot.com/DFPlayer_Mini_SKU_DFR0299#Connection_Diagram).
