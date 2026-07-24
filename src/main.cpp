@@ -50,6 +50,8 @@ void loop() {
 
   // ---------------------------------
 
+  randomSeed(nHeartbeats+67487);
+
   // Select action
   uint8_t action = getSelection();
 
