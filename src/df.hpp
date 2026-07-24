@@ -27,7 +27,7 @@ void play(uint8_t track, uint8_t duration, uint16_t volume = 21) {
   // Power on DFPlayer
   digitalWrite(0, HIGH);
   delay(1000);
-  // Force volume below 21. This is max by testing. 30 is max by DFPlayer manual
+  // Force volume below 21. This is max by testing. 30 is max by DFPlayer datasheet
   volume = (volume < 21) ? volume : 21;
   DFSerial.write(createCommand(0x06, 0x00, volume), 10);
   delay(100);
