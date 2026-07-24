@@ -11,7 +11,7 @@ uint16_t calculateCheckSum(uint8_t *buffer) {
 }
 
 uint8_t* createCommand(uint8_t command, uint8_t argumentHigh, uint8_t argumentLow) {
-  static uint8_t array[10] = {0x7E, 0xFF, 06, 00, 01, 00, 00, 00, 00, 0xEF};
+  static uint8_t array[10] = {0x7E, 0xFF, 06, 00, 00, 00, 00, 00, 00, 0xEF};
   array[3] = command;
   array[5] = argumentHigh;
   array[6] = argumentLow;
@@ -32,7 +32,7 @@ void play(uint8_t track, uint8_t duration, uint16_t volume = 21) {
   DFSerial.write(createCommand(0x06, 0x00, volume), 10);
   delay(100);
   // Play track
-  DFSerial.write(createCommand(0x03, 0x00, track), 10);
+  DFSerial.write(createCommand(0x0F, 0x01, track), 10);
   delay(500);
   // Connect speaker
   digitalWrite(1, HIGH);
