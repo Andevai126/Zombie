@@ -3,7 +3,6 @@
 #define START_EXP_3 3
 #define START_EXP_4 4
 #define START_EXP_5 5
-#define PLAY_FIRST_TRACK 6
 
 void blink() {
   digitalWrite(3, HIGH);

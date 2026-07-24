@@ -61,10 +61,6 @@ void loop() {
     case START_EXP_5:
       experienceBreakIn();
       break;
-
-    case PLAY_FIRST_TRACK:
-      play(1, 9);
-      break;
     
     default:
       break;

@@ -2,12 +2,12 @@ double c = 8.6339285714;
 
 /*
 location | description | duration
-0001 BROODS   9
-0002 Whispers 16
-0003 Watching 4
-0004 Laugh    4
-0005 Nails    5
-0006 Gunshot  3
+001 BROODS   9
+002 Whispers 16
+003 Watching 4
+004 Laugh    4
+005 Nails    5
+006 Gunshot  3
 */
 
 void experienceTest() {
