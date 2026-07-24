@@ -1,8 +1,8 @@
 # Zombie
-A hardware and software solution for your psychological tormenting needs.
+A low power, standalone device that can play soundtracks to your specifications. See the branches for use cases!
 
 ## Description
-The developed device can play any soundtracks, spaced over large periods of time. It is compact, runs on a single battery and is low power, using only 3μA in deepsleep!
+The developed device can play any soundtracks, spaced over large periods of time. It is compact, runs on a single battery and is low power, using only 3μA in deepsleep! It has a button for input, and an LED for feedback!
 
 ## Getting started
 [Learn how to upload code to an ATtiny85.](https://www.youtube.com/watch?v=sycSdI49hlY)
