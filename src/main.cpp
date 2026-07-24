@@ -27,9 +27,6 @@ void setup() {
   // Save power
   disable();
 
-  // Randomizer
-  randomSetup();
-
   LOGSerial.print(F("Setup complete"));
 }
 
