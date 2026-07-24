@@ -22,6 +22,13 @@ uint8_t* createCommand(uint8_t command, uint8_t argumentHigh, uint8_t argumentLo
 }
 
 void play(uint8_t track, uint8_t duration, uint16_t volume = 21) {
+  LOGSerial.print(F("Playing track: "));
+  LOGSerial.print(track);
+  LOGSerial.print(F(" with duration: "));
+  LOGSerial.print(duration);
+  LOGSerial.print(F(" and volume: "));
+  LOGSerial.println(volume);
+
   // Disconnect speaker
   digitalWrite(1, LOW);
   // Power on DFPlayer
